@@ -9,14 +9,17 @@
     <meta name="author" content="">
     <title>VNPAY RESPONSE</title>
     <!-- Bootstrap core CSS -->
-    <link href="/vnpay_php/assets/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/backend/assets/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
-    <link href="/vnpay_php/assets/jumbotron-narrow.css" rel="stylesheet">
-    <script src="/vnpay_php/assets/jquery-1.11.3.min.js"></script>
+    <link href="/backend/assets/jumbotron-narrow.css" rel="stylesheet">
+    <script src="/backend/assets/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 <?php
-require_once("./config.php");
+$vnp_TmnCode = "PQ5QGNWU"; //Mã website tại VNPAY
+$vnp_HashSecret = "XKFGEIEPJCLIUZWDDLIRZCHXNJOOLVZB"; //Chuỗi bí mật
+$vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+$vnp_Returnurl = "http://localhost/vnpay_php/vnpay_return.php";
 $vnp_SecureHash = $_GET['vnp_SecureHash'];
 $inputData = array();
 foreach ($_GET as $key => $value) {
@@ -44,7 +47,8 @@ $secureHash = hash('sha256',$vnp_HashSecret . $hashData);
 <!--Begin display -->
 <div class="container">
     <div class="header clearfix">
-        <h3 class="text-muted">VNPAY RESPONSE</h3>
+        <h3 class="text-muted col-6">VNPAY RESPONSE</h3>
+        <a class="col-6" href="{{route('payment.form')}}">Tiếp tục thanh toán</a>
     </div>
     <div class="table-responsive">
         <div class="form-group">
@@ -55,14 +59,14 @@ $secureHash = hash('sha256',$vnp_HashSecret . $hashData);
         <div class="form-group">
 
             <label >Số tiền:</label>
-            <label><?php echo $_GET['vnp_Amount'] ?></label>
+            <label><?php echo  number_format($_GET['vnp_Amount']/100,0,",",".").' đ'  ?></label>
         </div>
         <div class="form-group">
             <label >Nội dung thanh toán:</label>
             <label><?php echo $_GET['vnp_OrderInfo'] ?></label>
         </div>
         <div class="form-group">
-            <label >Mã phản hồi (vnp_ResponseCode):</label>
+            <label > (vnp_ResponseCode):</label>
             <label><?php echo $_GET['vnp_ResponseCode'] ?></label>
         </div>
         <div class="form-group">
@@ -75,7 +79,7 @@ $secureHash = hash('sha256',$vnp_HashSecret . $hashData);
         </div>
         <div class="form-group">
             <label >Thời gian thanh toán:</label>
-            <label><?php echo $_GET['vnp_PayDate'] ?></label>
+            <label><?php echo Carbon\Carbon::parse($_GET['vnp_PayDate'])->format('Y-m-d H:i:s') ?></label>
         </div>
         <div class="form-group">
             <label >Kết quả:</label>

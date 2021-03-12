@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 Route::get('/payment', 'AdminController@index')->name('payment.form');
 Route::post('/payment', 'AdminController@payment')->name('payment');
-Route::get('/return', 'AdminController@index')->name('return');
+Route::get('/return', 'AdminController@result')->name('return');

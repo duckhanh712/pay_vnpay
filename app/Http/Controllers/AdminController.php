@@ -11,8 +11,18 @@ class AdminController extends Controller
     {
         return view('payment.payment_form');
     }
+
+    public function result(Request $request)
+    {
+        $data = $request->all();
+
+        return view('payment.return',['data' => $data]);
+
+    }
+
     public function return(Request $request)
     {
+
         $vnp_TmnCode = "PQ5QGNWU"; //Mã website tại VNPAY
         $vnp_HashSecret = "XKFGEIEPJCLIUZWDDLIRZCHXNJOOLVZB"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -86,6 +96,7 @@ class AdminController extends Controller
             $returnData['Message'] = 'Unknow error';
         }
 //Trả lại VNPAY theo định dạng JSON
+
         echo json_encode($returnData);
     }
     public function payment (Request $request)
@@ -97,7 +108,7 @@ class AdminController extends Controller
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = route('return');
         $vnp_TxnRef = $request->order_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
+        $vnp_OrderInfo = $request->order_desc;
         $vnp_OrderType = $request->order_type;
         $vnp_Amount = $request->amount * 100;
         $vnp_Locale = $request->language;
