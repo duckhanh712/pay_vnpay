@@ -62,17 +62,11 @@
                     <div class="col-md-6">
                         <!-- general form elements -->
                         <div class="card card-primary">
-                            <form action="{{route('payment')}}" method="post">
+                            <form action="{{route('momo.payment')}}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label>Loại thanh toán</label>
-                                        <select class="form-control" name="order_type" id="order_type">
-                                            <option value="topup">Nạp tiền điện thoại</option>
-                                            <option value="billpayment">Thanh toán hóa đơn</option>
-                                            <option value="fashion">Thời trang</option>
-                                            <option value="other">Khác - Xem thêm tại VNPAY</option>
-                                        </select>
+                                        Test Thanh toán ví momo
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Số tiền</label>
@@ -80,51 +74,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Mã hóa đơn</label>
-                                        <input class="form-control" id="order_id" name="order_id" type="text" value="{{date("YmdHis")}}"/>
+                                        <input class="form-control" id="oderId" name="oderId" type="text" value="{{date("YmdHis")}}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Nội dung thanh toán</label>
-                                        <textarea class="form-control" id="order_desc" name="order_desc" type="text" value=""> </textarea>
+                                        <textarea class="form-control" id="extraData" name="extraData" type="text" value=""> </textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Ngân hàng</label>
-                                        <select class="form-control" name="bank_code" id="bank_code">
-                                            <option value="">Không chọn</option>
-                                            <option value="NCB"> Ngan hang NCB</option>
-                                            <option value="AGRIBANK"> Ngan hang Agribank</option>
-                                            <option value="SCB"> Ngan hang SCB</option>
-                                            <option value="SACOMBANK">Ngan hang SacomBank</option>
-                                            <option value="EXIMBANK"> Ngan hang EximBank</option>
-                                            <option value="MSBANK"> Ngan hang MSBANK</option>
-                                            <option value="NAMABANK"> Ngan hang NamABank</option>
-                                            <option value="VNMART"> Vi dien tu VnMart</option>
-                                            <option value="VIETINBANK">Ngan hang Vietinbank</option>
-                                            <option value="VIETCOMBANK"> Ngan hang VCB</option>
-                                            <option value="HDBANK">Ngan hang HDBank</option>
-                                            <option value="DONGABANK"> Ngan hang Dong A</option>
-                                            <option value="TPBANK"> Ngân hàng TPBank</option>
-                                            <option value="OJB"> Ngân hàng OceanBank</option>
-                                            <option value="BIDV"> Ngân hàng BIDV</option>
-                                            <option value="TECHCOMBANK"> Ngân hàng Techcombank</option>
-                                            <option value="VPBANK"> Ngan hang VPBank</option>
-                                            <option value="MBBANK"> Ngan hang MBBank</option>
-                                            <option value="ACB"> Ngan hang ACB</option>
-                                            <option value="OCB"> Ngan hang OCB</option>
-                                            <option value="IVB"> Ngan hang IVB</option>
-                                            <option value="VISA"> Thanh toan qua VISA/MASTER</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="language">Ngôn ngữ</label>
-                                        <select name="language" id="language" class="form-control">
-                                            <option value="vn">Tiếng Việt</option>
-                                            <option value="en">English</option>
-                                        </select>
-                                    </div>
-
                                 </div>
-                                <!-- /.card-body -->
-
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Thanh toán</button>
                             </div>
